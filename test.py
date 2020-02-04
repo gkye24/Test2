@@ -1,5 +1,2 @@
-import pygame
-
-pygame.init(
-    # hello
-)
+hello
+#hello
