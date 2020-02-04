@@ -30,3 +30,4 @@ while(dead==False):
     pygame.display.flip()
     clock.tick(clock_rate)
 
+hi
