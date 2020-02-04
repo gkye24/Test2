@@ -1,6 +1,7 @@
-from tkinter import *
+import tkinter
 import pygame
 
+#background
 pygame.init()
 
 window_width=500
@@ -29,3 +30,4 @@ while(dead==False):
     pygame.display.flip()
     clock.tick(clock_rate)
 
+hi
