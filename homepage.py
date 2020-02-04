@@ -1,6 +1,7 @@
-from tkinter import *
+import tkinter
 import pygame
 
+#background
 pygame.init()
 
 window_width=500
@@ -28,4 +29,19 @@ while(dead==False):
 
     pygame.display.flip()
     clock.tick(clock_rate)
+
+class Homepage(tkinter.Frame):
+    def __init__(self, master, jump, fly, racetrack, call_on_next):
+        super(Homepage, self).__init__(master)
+
+        self.jump = jump
+        self.fly = fly
+        self.racetrack = racetrack
+
+        self.call_on_selected = call_on_next
+
+        self.create_widgets()
+        self.grid()
+
+    def create_widgets(self):
 
