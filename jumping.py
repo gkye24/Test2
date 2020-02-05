@@ -18,7 +18,7 @@ pygame.display.set_caption("Homepage")
 dead = False
 
 clock = pygame.time.Clock()
-background_image = pygame.image.load("ground1.jpg").convert()
+background_image = pygame.image.load("haunted.png").convert()
 
 while (dead == False):
     for event in pygame.event.get():
