@@ -22,13 +22,12 @@ background_image = pygame.image.load("background1.gif").convert()
 
 menu = True
 
-
-
 while menu:
     screen.blit(background_image, [0, 0])
-    start_button = pygame.draw.rect(screen, (0, 0, 240), (150, 90, 100, 50))
-    continue_button = pygame.draw.rect(screen, (0, 244, 0), (150, 160, 100, 50))
-    quit_button = pygame.draw.rect(screen, (244, 0, 0), (150, 230, 100, 50))
+    race = pygame.draw.rect(screen, (255, 255, 255), (20, 20, 100, 40))
+    running = pygame.draw.rect(screen, (255, 255, 255), (150, 20, 100, 40))
+    jumping = pygame.draw.rect(screen, (255, 255, 255), (280, 20, 100, 40))
+    help = pygame.draw.rect(screen, (207, 185, 151), (420, 20, 50, 40))
 
     for event in pygame.event.get():
         print(event)
