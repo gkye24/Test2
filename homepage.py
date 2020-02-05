@@ -13,7 +13,7 @@ clock_rate = 20
 size = (window_width, window_height)
 screen = pygame.display.set_mode(size)
 
-pygame.display.set_caption("Homepage")
+pygame.display.set_caption("Homepage").
 
 dead = False
 
