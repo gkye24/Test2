@@ -1,8 +1,5 @@
 import tkinter
 import pygame
-
-
-# background
 pygame.init()
 
 window_width = 500
