@@ -1,5 +1,6 @@
 import tkinter
 import pygame
+from pygame.locals import *
 
 class Background:
     pygame.init()
@@ -17,10 +18,16 @@ class Background:
         dead = False
         self.clock = pygame.time.Clock()
         background_image = pygame.image.load("background1.gif").convert()
+
+        character = pygame.image.load("duckresized.png")
+        characterx = 0
+        charactery = 0
+
         menu = True
 
         while menu:
             self.screen.blit(background_image, [0, 0])
+            self.screen.blit(character, (characterx, charactery))
             race = pygame.draw.rect(self.screen, (255, 255, 255), (20, 20, 100, 40))
             flying = pygame.draw.rect(self.screen, (255, 255, 255), (150, 20, 100, 40))
             jumping = pygame.draw.rect(self.screen, (255, 255, 255), (280, 20, 100, 40))
@@ -36,9 +43,21 @@ class Background:
                         self.flyingbg()
                     elif mouse_x > 280 and mouse_x < 380 and mouse_y > 20 and mouse_y < 60:
                         self.jumpingbg()
+                if event in pygame.event.get():
+                    if event.key == K_a:
+                        characterx -= 2
+                    if event.key == K_d:
+                        characterx += 2
+                    if event.key == K_w:
+                        charactery -= 2
+                    if event.key == K_s:
+                        charactery += 2
                 if event.type == pygame.QUIT:
                     menu = False
+                    pygame.quit()
+                    exit()
 
+            pygame.display.update()
             pygame.display.flip()
             self.clock.tick(self.clock_rate)
 
