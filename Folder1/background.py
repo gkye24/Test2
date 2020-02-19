@@ -2,8 +2,13 @@ import pygame
 from pygame.locals import *
 import os
 
+pygame.mixer.init(44100, 16, 2, 4096)
 pygame.init()
 
+# background music
+pygame.mixer.music.load("happymusic.mp3")
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play(-1)
 
 class player(object):
     run = [pygame.image.load(os.path.join('duckresized.png'))]

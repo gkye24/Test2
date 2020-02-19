@@ -8,7 +8,7 @@ window_width = 500
 window_height = 300
 
 animation_increment = 10
-clock_rate = 20
+clock_rate = 60
 
 size = (window_width, window_height)
 screen = pygame.display.set_mode(size)
