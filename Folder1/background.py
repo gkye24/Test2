@@ -303,92 +303,38 @@ class Background:
             self.clock.tick(self.clock_rate)
 
     def helpbg(self):
-        black = (0, 0, 0)
-        white = (255, 255, 255)
-        green = (0, 255, 0)
-        red = (255, 0, 0)
+        pygame.display.set_caption("Rules")
+        dead = False
+        self.clock = pygame.time.Clock()
+        background_image = pygame.image.load("newrules.png").convert()
 
-        size = [500, 300]
-        screen = pygame.display.set_mode(size)
+        menu = True
 
-        pygame.display.set_caption("Instruction Screen")
+        while menu:
+            self.screen.blit(background_image, [0, 0])
+            back = pygame.draw.rect(self.screen, (0, 0, 0), (20, 20, 100, 30))
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_x = pygame.mouse.get_pos()[0]
+                    mouse_y = pygame.mouse.get_pos()[1]
+                    if mouse_x > 20 and mouse_x < 120 and mouse_y > 20 and mouse_y < 50:
+                        self.homepagebg()
 
-        done = False
+                if event.type == pygame.QUIT:
+                    menu = False
+                    pygame.quit()
+                    exit()
 
-        clock = pygame.time.Clock()
+            pygame.display.update()
+            pygame.display.flip()
+            self.clock.tick(self.clock_rate)
 
-        font = pygame.font.Font(None, 36)
-
-        display_instructions = True
-        instruction_page = 1
-
-        while not done and display_instructions:
+        while (dead == False):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    done = True
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    instruction_page += 1
-                    if instruction_page == 3:
-                        display_instructions = False
+                    dead = True
 
-            screen.fill(black)
+            self.screen.blit(background_image, [0, 0])
 
-            if instruction_page == 1:
-                text = font.render("Instructions", True, green)
-                screen.blit(text, [10, 10])
-
-                text = font.render("Page 1", True, red)
-                screen.blit(text, [10, 40])
-            if instruction_page == 2:
-                text = font.render("The purpose of this game: ducks", True, white)
-                screen.blit(text, [10, 10])
-
-                text = font.render("Page 2", True, red)
-                screen.blit(text, [10, 40])
-            # if instruction_page == 3:
-            #     text = font.render("Use the arrow keys to move the duck", True, white)
-            #     screen.blit(text, [10, 10])
-            #
-            #     text = font.render("Page 3", True, red)
-            #     screen.blit(text, [10, 40])
-
-            clock.tick(60)
             pygame.display.flip()
-
-        pygame.quit()
-
-        # pygame.display.set_caption("Rules")
-        # dead = False
-        # self.clock = pygame.time.Clock()
-        # background_image = pygame.image.load("newrules.png").convert()
-        #
-        # menu = True
-        #
-        # while menu:
-        #     self.screen.blit(background_image, [0, 0])
-        #     back = pygame.draw.rect(self.screen, (0, 0, 0), (20, 20, 100, 30))
-        #     for event in pygame.event.get():
-        #         if event.type == pygame.MOUSEBUTTONDOWN:
-        #             mouse_x = pygame.mouse.get_pos()[0]
-        #             mouse_y = pygame.mouse.get_pos()[1]
-        #             if mouse_x > 20 and mouse_x < 120 and mouse_y > 20 and mouse_y < 50:
-        #                 self.homepagebg()
-        #
-        #         if event.type == pygame.QUIT:
-        #             menu = False
-        #             pygame.quit()
-        #             exit()
-        #
-        #     pygame.display.update()
-        #     pygame.display.flip()
-        #     self.clock.tick(self.clock_rate)
-        #
-        # while (dead == False):
-        #     for event in pygame.event.get():
-        #         if event.type == pygame.QUIT:
-        #             dead = True
-        #
-        #     self.screen.blit(background_image, [0, 0])
-        #
-        #     pygame.display.flip()
-        #     self.clock.tick(self.clock_rate)
+            self.clock.tick(self.clock_rate)
