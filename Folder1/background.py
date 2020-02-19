@@ -14,6 +14,7 @@ pygame.mixer.music.play(-1)
 W, H = 500, 300
 win = pygame.display.set_mode((W, H))
 
+
 class player(object):
     run = pygame.image.load(os.path.join('duckresized.png'))
     jump = pygame.image.load(os.path.join('duckresized.png'))
@@ -23,6 +24,7 @@ class player(object):
                 -2, -2, -2, -3, -3, -3, -3, -3, -3,
                 -3, -3, -3, -3, -3, -3, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4]
     fall = pygame.image.load(os.path.join('duckresized.png'))
+
     def __init__(self, x, y, width, height):
         self.x = x
         self.y = y
@@ -45,16 +47,17 @@ class player(object):
                 self.jumpCount = 0
                 self.jumping = False
                 self.runCount = 0
-            self.hitbox = (self.x+ 4,self.y,self.width-24,self.height-10)
+            self.hitbox = (self.x + 4, self.y, self.width - 24, self.height - 10)
 
         else:
             if self.runCount > 42:
                 self.runCount = 0
             win.blit(self.run, (self.x, self.y))
             self.runCount += 1
-            self.hitbox = (self.x+ 4,self.y,self.width-24,self.height-13)
+            self.hitbox = (self.x + 4, self.y, self.width - 24, self.height - 13)
 
         # pygame.draw.rect(win, (255,0,0),self.hitbox, 2) # Draws hitbox
+
 
 class saw(object):
     rotate = pygame.image.load(os.path.join('log.jpg'))
@@ -68,7 +71,8 @@ class saw(object):
         self.vel = 1.4
 
     def draw(self, win):
-        self.hitbox = (self.x + 10, self.y + 5, self.width - 20, self.height - 5)  # Defines the accurate hitbox for our character
+        self.hitbox = (
+        self.x + 10, self.y + 5, self.width - 20, self.height - 5)  # Defines the accurate hitbox for our character
         pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
         if self.rotateCount >= 8:  # This is what will allow us to animate the saw
             self.rotateCount = 0
@@ -82,9 +86,10 @@ class saw(object):
                 return True
         return False
 
+
 obstacles = []
 
-pygame.time.set_timer(USEREVENT+2, random.randrange(2000, 3500)) # Will trigger every 2 - 3.5 seconds
+pygame.time.set_timer(USEREVENT + 2, random.randrange(2000, 3500))  # Will trigger every 2 - 3.5 seconds
 
 
 class Background:
@@ -111,6 +116,9 @@ class Background:
         character_y = 220
         vel = 5
         menu = True
+
+        run = True
+        speed = 30  # NEW
 
         while menu:
             self.screen.blit(background_image, [0, 0])
