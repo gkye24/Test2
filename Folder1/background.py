@@ -14,7 +14,6 @@ pygame.mixer.music.play(-1)
 W, H = 500, 300
 win = pygame.display.set_mode((W, H))
 
-
 class player(object):
     run = pygame.image.load(os.path.join('duckresized.png'))
     jump = pygame.image.load(os.path.join('duckresized.png'))
@@ -40,7 +39,7 @@ class player(object):
 
         if self.jumping:
             self.y -= self.jumpList[self.jumpCount] * 1.2
-            win.blit(self.jump[self.jumpCount // 18], (self.x, self.y))
+            win.blit(self.jump, (self.x, self.y))
             self.jumpCount += 1
             if self.jumpCount > 108:
                 self.jumpCount = 0
@@ -51,12 +50,11 @@ class player(object):
         else:
             if self.runCount > 42:
                 self.runCount = 0
-            win.blit(self.run[self.runCount // 6], (self.x, self.y))
+            win.blit(self.run, (self.x, self.y))
             self.runCount += 1
             self.hitbox = (self.x+ 4,self.y,self.width-24,self.height-13)
 
-        pygame.draw.rect(win, (255,0,0),self.hitbox, 2) # Draws hitbox
-
+        # pygame.draw.rect(win, (255,0,0),self.hitbox, 2) # Draws hitbox
 
 class saw(object):
     rotate = pygame.image.load(os.path.join('log.jpg'))
@@ -70,8 +68,7 @@ class saw(object):
         self.vel = 1.4
 
     def draw(self, win):
-        self.hitbox = (
-        self.x + 10, self.y + 5, self.width - 20, self.height - 5)  # Defines the accurate hitbox for our character
+        self.hitbox = (self.x + 10, self.y + 5, self.width - 20, self.height - 5)  # Defines the accurate hitbox for our character
         pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
         if self.rotateCount >= 8:  # This is what will allow us to animate the saw
             self.rotateCount = 0
@@ -171,7 +168,7 @@ class Background:
 
         clock = pygame.time.Clock()
 
-        runner = player(0, 220)
+        runner = player(0, 220, 64, 64)
         pygame.time.set_timer(USEREVENT + 1, 500)  # Sets the timer for 0.5 seconds
 
         run = True
@@ -182,11 +179,11 @@ class Background:
             self.bgX -= 1.4  # Move both background images back
             self.bgX2 -= 1.4
 
-            if self.bgX < self.window_width() * -1:  # If our bg is at the -width then reset its position
-                self.bgX = self.window_width()
+            if self.bgX < self.window_width * -1:  # If our bg is at the -width then reset its position
+                self.bgX = self.window_width
 
-            if self.bgX2 < self.window_width() * -1:
-                self.bgX2 = self.window_width()
+            if self.bgX2 < self.window_width * -1:
+                self.bgX2 = self.window_width
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -199,6 +196,8 @@ class Background:
             if keys[pygame.K_SPACE] or keys[pygame.K_UP]:  # If user hits space or up arrow key
                 if not runner.jumping:  # If we are not already jumping
                     runner.jumping = True
+
+            self.redrawWindow(background_image, runner)
 
         menu = True
 
@@ -384,12 +383,13 @@ class Background:
             pygame.display.flip()
             self.clock.tick(self.clock_rate)
 
-def redrawWindow():
-    win.blit(bg, (bgX, 0))  # draws our first bg image
-    win.blit(bg, (bgX2, 0))  # draws the second bg image
-    for obstacle in obstacles:
-        if obstacle.collide(runner.hitbox):
-            runner.falling = True
-        obstacle.draw(win)
+    def redrawWindow(self, bg, runner):
+        win.blit(bg, (self.bgX, 0))  # draws our first bg image
+        win.blit(bg, (self.bgX2, 0))  # draws the second bg image
+        for obstacle in obstacles:
+            if obstacle.collide(runner.hitbox):
+                runner.falling = True
+            obstacle.draw(win)
+        runner.draw(win)
 
-    pygame.display.update()  # updates the screen
+        pygame.display.update()  # updates the screen
