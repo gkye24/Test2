@@ -4,12 +4,15 @@ import os
 
 pygame.init()
 
+
 class player(object):
     run = [pygame.image.load(os.path.join('duckresized.png'))]
     jump = [pygame.image.load(os.path.join('duckresized.png'))]
-    jumpList = [1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,
-                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,-1,-1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-3,-3,-3,-3,-3,-3,
-                -3,-3,-3,-3,-3,-3,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4]
+    jumpList = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4,
+                4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1, -1, -1, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+                -2, -2, -2, -3, -3, -3, -3, -3, -3,
+                -3, -3, -3, -3, -3, -3, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4]
 
     def __init__(self, x, y):
         self.x = x
@@ -33,6 +36,7 @@ class player(object):
                 self.runCount = 0
             win.blit(self.run[self.runCount // 6], (self.x, self.y))
             self.runCount += 1
+
 
 class Background:
     pygame.init()
@@ -61,14 +65,14 @@ class Background:
         background_image = pygame.image.load("background1.gif").convert()
 
         character = pygame.image.load("duckresized.png")
-        characterx = 0
-        charactery = 220
+        character_x = 0
+        character_y = 220
         vel = 5
         menu = True
 
         while menu:
             self.screen.blit(background_image, [0, 0])
-            self.screen.blit(character, (characterx, charactery))
+            self.screen.blit(character, (character_x, character_y))
             race = pygame.draw.rect(self.screen, (255, 255, 255), (20, 20, 100, 40))
             flying = pygame.draw.rect(self.screen, (255, 255, 255), (150, 20, 100, 40))
             running = pygame.draw.rect(self.screen, (255, 255, 255), (280, 20, 100, 40))
@@ -91,10 +95,10 @@ class Background:
 
             keys = pygame.key.get_pressed()
             if keys[pygame.K_LEFT]:
-                characterx -= vel
+                character_x -= vel
 
             if keys[pygame.K_RIGHT]:
-                characterx += vel
+                character_x += vel
 
             pygame.display.update()
             pygame.display.flip()
@@ -103,7 +107,7 @@ class Background:
         pygame.quit()
         exit()
 
-        while (dead == False):
+        while not dead:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     dead = True
@@ -148,7 +152,7 @@ class Background:
             keys = pygame.key.get_pressed()
 
             if keys[pygame.K_SPACE] or keys[pygame.K_UP]:  # If user hits space or up arrow key
-                if not (runner.jumping):  # If we are not already jumping
+                if not runner.jumping:  # If we are not already jumping
                     runner.jumping = True
 
         menu = True
@@ -162,7 +166,7 @@ class Background:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     mouse_x = pygame.mouse.get_pos()[0]
                     mouse_y = pygame.mouse.get_pos()[1]
-                    if mouse_x > 20 and mouse_x < 120 and mouse_y > 20 and mouse_y < 60:
+                    if 20 < mouse_x < 120 and 20 < mouse_y < 60:
                         self.homepagebg()
 
                 if event.type == pygame.QUIT:
@@ -175,7 +179,7 @@ class Background:
         pygame.quit()
         exit()
 
-        while (dead == False):
+        while not dead:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     dead = True
@@ -192,8 +196,8 @@ class Background:
         background_image = pygame.image.load("haunted.png").convert()
 
         character = pygame.image.load("duckresized.png")
-        characterx = 0
-        charactery = 220
+        character_x = 0
+        character_y = 220
         vel = 5
 
         menu = True
@@ -201,7 +205,7 @@ class Background:
         while menu:
             pygame.time.delay(100)
             self.screen.blit(background_image, [0, 0])
-            self.screen.blit(character, (characterx, charactery))
+            self.screen.blit(character, (character_x, character_y))
 
             back = pygame.draw.rect(self.screen, (255, 255, 255), (20, 20, 100, 40))
 
@@ -209,7 +213,7 @@ class Background:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     mouse_x = pygame.mouse.get_pos()[0]
                     mouse_y = pygame.mouse.get_pos()[1]
-                    if mouse_x > 20 and mouse_x < 120 and mouse_y > 20 and mouse_y < 60:
+                    if 20 < mouse_x < 120 and 20 < mouse_y < 60:
                         self.homepagebg()
 
                 if event.type == pygame.QUIT:
@@ -217,10 +221,10 @@ class Background:
 
             keys = pygame.key.get_pressed()
             if keys[pygame.K_LEFT]:
-                characterx -= vel
+                character_x -= vel
 
             if keys[pygame.K_RIGHT]:
-                characterx += vel
+                character_x += vel
 
             pygame.display.update()
             pygame.display.flip()
@@ -229,7 +233,7 @@ class Background:
         pygame.quit()
         exit()
 
-        while (dead == False):
+        while not dead:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     dead = True
@@ -246,8 +250,8 @@ class Background:
         background_image = pygame.image.load("sky2.png").convert()
 
         character = pygame.image.load("duckresized.png")
-        characterx = 0
-        charactery = 220
+        character_x = 0
+        character_y = 220
         vel = 5
 
         menu = True
@@ -255,7 +259,7 @@ class Background:
         while menu:
             pygame.time.delay(100)
             self.screen.blit(background_image, [0, 0])
-            self.screen.blit(character, (characterx, charactery))
+            self.screen.blit(character, (character_x, character_y))
 
             back = pygame.draw.rect(self.screen, (255, 255, 255), (20, 20, 100, 40))
 
@@ -263,7 +267,7 @@ class Background:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     mouse_x = pygame.mouse.get_pos()[0]
                     mouse_y = pygame.mouse.get_pos()[1]
-                    if mouse_x > 20 and mouse_x < 120 and mouse_y > 20 and mouse_y < 60:
+                    if 20 < mouse_x < 120 and 20 < mouse_y < 60:
                         self.homepagebg()
 
                 if event.type == pygame.QUIT:
@@ -271,10 +275,10 @@ class Background:
 
             keys = pygame.key.get_pressed()
             if keys[pygame.K_LEFT]:
-                characterx -= vel
+                character_x -= vel
 
             if keys[pygame.K_RIGHT]:
-                characterx += vel
+                character_x += vel
 
             pygame.display.update()
             pygame.display.flip()
@@ -283,7 +287,7 @@ class Background:
         pygame.quit()
         exit()
 
-        while (dead == False):
+        while not dead:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     dead = True
@@ -301,7 +305,6 @@ class Background:
 
         size = [500, 300]
         screen = pygame.display.set_mode(size)
-
 
         pygame.display.set_caption("Instruction Screen")
 
@@ -384,4 +387,3 @@ class Background:
         #
         #     pygame.display.flip()
         #     self.clock.tick(self.clock_rate)
-
