@@ -82,7 +82,7 @@ class saw(object):
         return False
 
 class spike(saw):
-    img2 = pygame.image.load(os.path.join('gem.jpg'))
+    img2 = pygame.image.load(os.path.join('gem2.png'))
 
     def draw(self, win):
         self.hitbox = (self.x + 10, self.y + 5, self.width - 20, self.height - 5)  # Defines the accurate hitbox for our character
@@ -90,7 +90,7 @@ class spike(saw):
         win.blit(pygame.transform.scale(self.img2, (64, 64)), (self.x, self.y))  # scales our image down to 64x64 before drawing
 
 class bump(saw):
-    img3 = pygame.image.load(os.path.join('flower.jpg'))
+    img3 = pygame.image.load(os.path.join('flower2.jpg'))
 
     def draw(self, win):
         self.hitbox = (self.x + 10, self.y + 5, self.width - 20, self.height - 5)  # Defines the accurate hitbox for our character
@@ -213,16 +213,13 @@ class Background:
                     pygame.quit()
                     quit()
                 if event.type == USEREVENT+1:
-                    print("Updating speed")
                     speed += 1
                 if event.type == USEREVENT + 2:
-                    print("Time for an obstacle")
                     pygame.time.set_timer(USEREVENT + 2,
                     random.randrange(5000, 7000))
 
                     r = 0
                     if r == 0:
-                        print("log")
                         log = saw(self.window_width, 200, 64, 64)
                         obstacles.append(log)
 
@@ -235,29 +232,6 @@ class Background:
             self.redrawWindow(background_image, runner, obstacles)
             if runner.falling:
                 self.fallbg()
-        menu = True
-
-        while menu and not runner.falling:
-            pygame.time.delay(100)
-            self.screen.blit(background_image, [0, 0])
-            back = pygame.draw.rect(self.screen, (255, 255, 255), (20, 20, 100, 40))
-
-            for event in pygame.event.get():
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    mouse_x = pygame.mouse.get_pos()[0]
-                    mouse_y = pygame.mouse.get_pos()[1]
-                    if 20 < mouse_x < 120 and 20 < mouse_y < 60:
-                        self.homepagebg()
-
-                if event.type == pygame.QUIT:
-                    menu = False
-
-            pygame.display.update()
-            pygame.display.flip()
-            self.clock.tick(self.clock_rate)
-
-        pygame.quit()
-        exit()
 
         while not dead:
             for event in pygame.event.get():
@@ -285,7 +259,7 @@ class Background:
 
         run = True
         obstacles = []
-        speed = 30
+        speed = 40
 
         while run and not runner.falling:
             clock.tick(speed)
@@ -310,20 +284,16 @@ class Background:
                     pygame.quit()
                     quit()
                 if event.type == USEREVENT + 1:
-                    print("Updating speed")
-                    speed += 1
+                    speed += 2
                 if event.type == USEREVENT + 2:
-                    print("Time for an obstacle")
                     pygame.time.set_timer(USEREVENT + 2,
                     random.randrange(3000, 5000))
 
                     r = random.randrange(0, 2)
                     if r == 0:
-                        print("log")
                         log = saw(self.window_width, 220, 64, 64)
                         obstacles.append(log)
                     else:
-                        print("gem")
                         gem = spike(self.window_width, 220, 64, 64)
                         obstacles.append(gem)
             keys = pygame.key.get_pressed()
@@ -335,29 +305,6 @@ class Background:
             self.redrawWindow(background_image, runner, obstacles)
             if runner.falling:
                 self.fallbg()
-        menu = True
-
-        while menu and not runner.falling:
-            pygame.time.delay(100)
-            self.screen.blit(background_image, [0, 0])
-            back = pygame.draw.rect(self.screen, (255, 255, 255), (20, 20, 100, 40))
-
-            for event in pygame.event.get():
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    mouse_x = pygame.mouse.get_pos()[0]
-                    mouse_y = pygame.mouse.get_pos()[1]
-                    if 20 < mouse_x < 120 and 20 < mouse_y < 60:
-                        self.homepagebg()
-
-                if event.type == pygame.QUIT:
-                    menu = False
-
-            pygame.display.update()
-            pygame.display.flip()
-            self.clock.tick(self.clock_rate)
-
-        pygame.quit()
-        exit()
 
         while not dead:
             for event in pygame.event.get():
@@ -385,7 +332,7 @@ class Background:
 
         run = True
         obstacles = []
-        speed = 30
+        speed = 50
 
         while run and not runner.falling:
             clock.tick(speed)
@@ -410,26 +357,22 @@ class Background:
                     pygame.quit()
                     quit()
                 if event.type == USEREVENT + 1:
-                    print("Updating speed")
-                    speed += 1
+                    speed += 3
                 if event.type == USEREVENT + 2:
-                    print("Time for an obstacle")
                     pygame.time.set_timer(USEREVENT + 2,
                                           random.randrange(2000, 4000))
 
                     r = random.randrange(0, 2)
                     if r == 0:
-                        print("log")
                         log = saw(self.window_width, 200, 64, 64)
                         obstacles.append(log)
-                    elif r == 0:
-                        print("flower")
+                    elif r == 1:
                         flower = bump(self.window_width, 200, 64, 64)
                         obstacles.append(flower)
                     else:
-                        print("gem")
                         gem = spike(self.window_width, 200, 64, 64)
                         obstacles.append(gem)
+
             keys = pygame.key.get_pressed()
 
             if keys[pygame.K_SPACE] or keys[pygame.K_UP]:  # If user hits space or up arrow key
@@ -439,29 +382,6 @@ class Background:
             self.redrawWindow(background_image, runner, obstacles)
             if runner.falling:
                 self.fallbg()
-        menu = True
-
-        while menu and not runner.falling:
-            pygame.time.delay(100)
-            self.screen.blit(background_image, [0, 0])
-            back = pygame.draw.rect(self.screen, (255, 255, 255), (20, 20, 100, 40))
-
-            for event in pygame.event.get():
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    mouse_x = pygame.mouse.get_pos()[0]
-                    mouse_y = pygame.mouse.get_pos()[1]
-                    if 20 < mouse_x < 120 and 20 < mouse_y < 60:
-                        self.homepagebg()
-
-                if event.type == pygame.QUIT:
-                    menu = False
-
-            pygame.display.update()
-            pygame.display.flip()
-            self.clock.tick(self.clock_rate)
-
-        pygame.quit()
-        exit()
 
         while not dead:
             for event in pygame.event.get():
@@ -514,18 +434,18 @@ class Background:
         pygame.display.set_caption("Rules")
         dead = False
         self.clock = pygame.time.Clock()
-        background_image = pygame.image.load("newrules.png").convert()
+        background_image = pygame.image.load("rules2.png").convert()
 
         menu = True
 
         while menu:
             self.screen.blit(background_image, [0, 0])
-            back = pygame.draw.rect(self.screen, (0, 0, 0), (20, 20, 100, 30))
+            back = pygame.draw.rect(self.screen, (0, 0, 0), (20, 10, 100, 30))
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     mouse_x = pygame.mouse.get_pos()[0]
                     mouse_y = pygame.mouse.get_pos()[1]
-                    if mouse_x > 20 and mouse_x < 120 and mouse_y > 20 and mouse_y < 50:
+                    if mouse_x > 20 and mouse_x < 120 and mouse_y > 10 and mouse_y < 40:
                         self.homepagebg()
 
                 if event.type == pygame.QUIT:
