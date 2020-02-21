@@ -397,7 +397,7 @@ class Background:
         pygame.display.set_caption("Dead")
         dead = False
         self.clock = pygame.time.Clock()
-        background_image = pygame.image.load("diedresized.png").convert()
+        background_image = pygame.image.load("gameoverresized.jpg").convert()
 
         menu = True
 
